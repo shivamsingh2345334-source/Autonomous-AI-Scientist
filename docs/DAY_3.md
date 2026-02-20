@@ -1,4 +1,4 @@
-# 🚀 Day 6 – Autonomous Experiment Execution Engine
+# 🚀 Day 3 – Autonomous Experiment Execution Engine
 
 ## 🧠 Problem Statement
 
