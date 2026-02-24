@@ -1,0 +1,4 @@
+Topic: maths
+
+Title: Art Speaks Maths, Maths Speaks Art
+Summary: Our interdisciplinary team Mathematics for Applications in Cultural Heritage (MACH) aims to use mathematical research for the benefit of the arts and humanities. Our ultimate goal is to create user-friendly software toolkits for artists, art conservators and archaeologists. In order for their underlying mathematical engines and functionality to be optimised for the needs of the end users, we pursue an iterative approach based on a continuous com...
