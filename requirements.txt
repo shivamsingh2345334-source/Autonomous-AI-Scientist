@@ -1,2 +1,5 @@
 groq
 arxiv
+langchain
+langchain-groq
+chromadb
