@@ -3,3 +3,12 @@ arxiv
 langchain
 langchain-groq
 chromadb
+# Core LLM orchestration
+langchain>=0.1.0
+langchain-groq>=0.0.5
+
+# Scientific computing & visualization
+matplotlib>=3.8.0
+numpy>=1.26.0
+pandas>=2.1.0
+python-dotenv>=1.0.0
