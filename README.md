@@ -79,3 +79,22 @@ Visionary Scientist
 Skeptical Reviewer
 
 Lead Lab Director
+
+
+
+---------------------------------
+#day 3
+# 🧠 Autonomous Experiment Engine
+
+A production-ready framework for autonomous AI experiments.
+
+## Features
+- LLM-driven code generation
+- Safe execution
+- Self-healing retry loop
+- Modular architecture
+
+## Use Cases
+- AI research
+- Data science automation
+- Autonomous agents
