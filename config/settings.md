@@ -1,17 +1,24 @@
-## Configuration (Future)
+"""
+Central configuration for Autonomous Experiment Engine
+"""
 
-- API keys
-- Model selection
-- Search depth
-- Autonomous loops
+MAX_RETRIES = 3
+EXECUTION_TIMEOUT_SECONDS = 30
 
+USE_SYNTHETIC_DATA_ONLY = True
 
-# Configuration – Day 2
+ALLOW_FILE_SYSTEM_ACCESS = False
+ALLOW_NETWORK_ACCESS = False
 
-LLM Provider: Groq
-Model: llama-3.3-70b-versatile
-Temperature: 0.6
+ENABLE_VERBOSE_LOGS = True
 
-Vector Store:
-- Engine: ChromaDB
-- Collection: autonomous_research_memory
+SYSTEM_ROLE = "You are an Autonomous Research Engineer."
+
+LLM_PROVIDER = "groq"
+MODEL_NAME = "llama-3.1-70b"
+TEMPERATURE = 0.2
+MAX_TOKENS = 2048
+STRICT_CODE_ONLY_RESPONSE = True
+
+ENABLE_PLOTS = True
+DEFAULT_PLOT_BACKEND = "matplotlib"
