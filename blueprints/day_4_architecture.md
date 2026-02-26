@@ -18,3 +18,22 @@ AI Decision Output
 - Modular
 - Extensible
 - Research-grade
+
+
+# 🧬 AI Research Blueprint
+
+## Agent Role
+Statistical Validation Agent
+
+## Inputs
+- Compound efficacy data
+- Molecular metadata
+
+## Outputs
+- Statistical decision
+- Visual dashboard
+
+## Future Extensions
+- Bayesian inference
+- Multi-arm clinical simulation
+- Autonomous experiment design
