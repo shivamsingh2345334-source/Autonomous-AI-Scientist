@@ -98,3 +98,108 @@ A production-ready framework for autonomous AI experiments.
 - AI research
 - Data science automation
 - Autonomous agents
+
+
+
+# 🧪 AI Drug Efficacy Statistical Analyst  
+### Day 4 — Research-Grade Statistical Intelligence Engine
+
+> **An AI-powered statistical validation system for experimental drug efficacy, designed for modern AI-driven R&D pipelines.**
+
+---
+
+## 🚀 Why This Project Exists
+
+In real-world **drug discovery and biotech R&D**, teams test **dozens or hundreds of compounds**.  
+The biggest mistake early-stage research makes?
+
+❌ Choosing compounds based on **intuition**  
+❌ Relying on **raw averages**  
+❌ Ignoring **statistical significance**
+
+This project solves that.
+
+---
+
+## 🎯 Core Problem
+
+Given experimental drug efficacy data:
+
+- How do we **objectively validate** results?
+- How do we **filter noise vs signal**?
+- How do we **decide which compound deserves deeper research investment**?
+
+Manual analysis is:
+- Slow
+- Error-prone
+- Not scalable
+
+---
+
+## ✅ Solution Overview
+
+This repository introduces a **Statistical Analyst AI Agent** that:
+
+✔ Performs **hypothesis testing** using classical statistics  
+✔ Evaluates results against a **baseline efficacy threshold**  
+✔ Automatically identifies **top-performing compounds**  
+✔ Generates **interactive dashboards** for human + AI decision-makers  
+
+This is **how real research labs work**.
+
+---
+
+## 🧠 Intelligence Layer (What Makes It Special)
+
+### 1️⃣ Statistical Validation (Not Guesswork)
+- One-sample **t-test**
+- Null hypothesis: *compound efficacy ≤ baseline*
+- Confidence-driven decision logic
+
+### 2️⃣ Autonomous Decision Engine
+- P-value driven branching
+- Automatically recommends **next research focus**
+- Eliminates emotional bias
+
+### 3️⃣ Visual Intelligence
+- Interactive Plotly dashboards
+- Color-scaled efficacy mapping
+- Executive-level interpretability
+
+---
+
+## 🏗️ System Architecture
+
+
+Raw Experimental Data
+↓
+DataFrame Normalization
+↓
+Statistical Analysis Engine
+↓
+Hypothesis Testing (t-test)
+↓
+Compound Ranking
+↓
+Interactive Visualization
+↓
+AI Research Decision Output
+
+
+
+## 🧪 Example Usage
+
+```python
+from src.analyst import AI_Analyst
+
+data = {
+    "compound": ["Alpha-7", "Beta-2", "Gamma-9"],
+    "efficacy": [42, 88, 35],
+    "molecular_weight": [250.4, 310.2, 280.5]
+}
+
+analyst = AI_Analyst()
+decision, dashboard = analyst.perform_analysis(data)
+
+print(decision)
+dashboard.show()
