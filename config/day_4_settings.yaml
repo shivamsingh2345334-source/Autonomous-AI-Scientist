@@ -1,0 +1,6 @@
+analysis:
+  baseline_efficacy: 50
+  significance_level: 0.05
+
+visualization:
+  color_scale: Viridis
