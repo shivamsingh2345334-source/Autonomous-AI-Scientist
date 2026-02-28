@@ -2,3 +2,10 @@ __pycache__/
 .env
 .ipynb_checkpoints/
 .DS_Store
+__pycache__/
+.env
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.ipynb_checkpoints/
