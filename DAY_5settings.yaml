@@ -1,3 +1,0 @@
-model: llama-3.3-70b-versatile
-default_topic: "Quantum Computing in Drug Discovery"
-max_paragraphs: 3
