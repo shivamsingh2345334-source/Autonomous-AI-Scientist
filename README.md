@@ -228,3 +228,11 @@ Rapid literature reviews
 Startup R&D analysis
 
 Scientific hypothesis exploration
+
+
+
+## 🔬 Example Output
+
+> Topic: Quantum Computing in Drug Discovery
+
+The nascent realm of quantum computing has precipitated a paradigmatic shift in computational science...
