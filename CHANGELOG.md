@@ -10,11 +10,7 @@
 - Added self-critique and refinement loop
 - Implemented persistent vector memory
 --------------------------
-##day 3
-# Changelog
-
-## [1.0.0] – 2026-02-25
-### Added
+##v0.3 -Day 3
 - Autonomous experiment runner
 - LLM agent
 - Secure execution engine
@@ -23,8 +19,15 @@
 
 -----------------------
 
-## [Day 4] - Statistical Intelligence
-### Added
+##v0.4-Day 4
 - AI Statistical Analyst Agent
 - Hypothesis testing engine
 - Interactive visualization dashboard
+
+---------------------------------------------
+
+## v0.5 – Day 5
+- Added Groq-based scientific reasoning engine
+- Integrated Tavily retrieval
+- Implemented autonomous abstract synthesis
+- Structured production-ready project architecture
