@@ -203,3 +203,28 @@ decision, dashboard = analyst.perform_analysis(data)
 
 print(decision)
 dashboard.show()
+
+
+
+
+# 🚀 Groq Scientist
+
+An autonomous AI research assistant that performs real-time web retrieval and synthesizes professional scientific abstracts using Groq LLM.
+
+## 🔬 Features
+- Lightning-fast inference via Groq
+- Retrieval-Augmented Generation (RAG)
+- Fully autonomous scientific summarization
+
+## ⚙️ Tech Stack
+- Groq LLM (Llama 3.3 70B)
+- Tavily Search API
+- Python
+
+🎯 Use Cases
+
+Rapid literature reviews
+
+Startup R&D analysis
+
+Scientific hypothesis exploration
