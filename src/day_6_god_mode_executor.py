@@ -1,126 +1,125 @@
-"""
-god_mode_executor.py
-
-Self-healing execution loop that asks an LLM to generate Python code,
-runs it safely, validates output, and retries if needed.
-
-Before running:
-- Configure your LLM (LangChain / OpenAI / etc.)
-- Replace the `llm` placeholder with your actual model.
-"""
-
 import traceback
 import sys
-from io import StringIO
 import pandas as pd
+import numpy as np
+from io import StringIO
+from langchain_core.messages import HumanMessage, SystemMessage
 
-# Optional: Uncomment and configure if using LangChain
-# from langchain.schema import SystemMessage, HumanMessage
-
-# =========================
-# LLM PLACEHOLDER
-# =========================
-class DummyLLM:
-    """
-    Replace this with your real LLM client.
-    """
-    def invoke(self, messages):
-        raise NotImplementedError(
-            "Configure your LLM before running. Replace DummyLLM."
-        )
-
-llm = DummyLLM()
-
-
-# =========================
-# Execution Engine
-# =========================
+# ============================================================
+# 1. THE EXECUTION MODULE (The Muscle 🛡️)
+# ============================================================
 def advanced_run_code(code_string):
+    """
+    AI-generated code ko safe environment mein run karta hai 
+    aur output ko capture karta hai.
+    """
     old_stdout = sys.stdout
     redirected_output = sys.stdout = StringIO()
-
+    
+    # Global environment taaki pandas/numpy imports accessible rahein
     local_vars = {}
 
     try:
+        # AI ka likha code execute ho raha hai
         exec(code_string, globals(), local_vars)
         sys.stdout = old_stdout
-        return {"status": "success", "output": redirected_output.getvalue()}
+        return {
+            "status": "success", 
+            "output": redirected_output.getvalue()
+        }
     except Exception:
         sys.stdout = old_stdout
-        return {"status": "error", "output": traceback.format_exc()}
+        # Error ka poora 'traceback' capture karna Healing ke liye zaroori hai
+        return {
+            "status": "error", 
+            "output": traceback.format_exc()
+        }
 
-
-# =========================
-# Output Validator
-# =========================
+# ============================================================
+# 2. THE VALIDATION MODULE (The Judge ⚖️)
+# ============================================================
 def is_output_valid(output):
+    """
+    Check karta hai ki result 'nan' ya empty toh nahi hai.
+    """
     forbidden_words = ["nan", "none", "invalid value"]
-    if not output.strip() or any(word in output.lower() for word in forbidden_words):
+    
+    if not output.strip():
         return False
+    
+    if any(word in output.lower() for word in forbidden_words):
+        return False
+        
     return True
 
-
-# =========================
-# Self-Healing Loop
-# =========================
-def god_mode_executor(task, max_attempts=4):
+# ============================================================
+# 3. THE GOD-MODE ENGINE (The Brain 🧠)
+# ============================================================
+def god_mode_executor(llm_instance, task, max_attempts=4):
+    """
+    Self-Healing Loop: Attempt -> Run -> Error -> Fix -> Success.
+    """
     print(f"🚀 Mission Started: {task}")
     history = ""
 
     for i in range(max_attempts):
-        print(f"\n🧠 Attempt {i+1}: AI is brainstorming...")
+        print(f"\n🧠 Attempt {i+1}: AI is brainstorming & coding...")
 
         prompt = f"""
-You are a Senior Data Scientist.
-TASK: {task}
-ERROR_HISTORY: {history}
+        You are a Senior Data Scientist.
+        TASK: {task}
+        ERROR_HISTORY: {history}
 
-INSTRUCTIONS:
-1. Write full Python code.
-2. Ensure data variance so t-tests do not return NaN.
-3. Print results clearly.
-4. Return ONLY code.
-"""
+        INSTRUCTIONS:
+        1. Write full Python code using pandas, numpy, and scipy.
+        2. Use np.random.normal or seeds to ensure data has variance.
+        3. Prevent 'nan' results in t-tests by ensuring data groups are different.
+        4. Print the final statistical results (Mean, P-Value) clearly.
+        5. Return ONLY the code block.
+        """
 
-        try:
-            ai_response = llm.invoke([
-                # SystemMessage(content="You are a production-ready coder."),
-                # HumanMessage(content=prompt)
-                prompt  # Simple fallback if not using LangChain message objects
-            ])
-            content = getattr(ai_response, "content", str(ai_response))
-        except Exception as e:
-            return f"LLM not configured: {e}"
+        # LLM (Groq/Llama) se code mangwana
+        ai_response = llm_instance.invoke([
+            SystemMessage(content="You are a production-ready coder who returns only clean Python code."),
+            HumanMessage(content=prompt)
+        ]).content
 
-        clean_code = content.replace("```python", "").replace("```", "").strip()
+        # Code ko clean karna (Markdown formatting hatana)
+        clean_code = ai_response.replace("```python", "").replace("```", "").strip()
 
+        # Step 1: Execute the code
         result = advanced_run_code(clean_code)
 
         if result["status"] == "success":
+            # Step 2: Validate the logic
             if is_output_valid(result["output"]):
-                print("✅ SUCCESS: Valid output obtained.")
+                print(f"✅ SUCCESS: Code executed and logic is valid!")
                 return result["output"]
             else:
-                print("⚠️ Invalid output detected. Retrying...")
-                history += f"\nAttempt {i+1} invalid output: {result['output']}"
+                print(f"⚠️ Warning: Output contained 'nan'. Retrying with better data...")
+                history += f"\nAttempt {i+1} gave 'nan' results. Please increase data variance."
         else:
-            print("❌ Execution error encountered.")
-            history += f"\nAttempt {i+1} error: {result['output']}"
+            # Step 3: Self-Heal if error occurs
+            error_msg = result['output'].splitlines()[-1]
+            print(f"❌ Error detected: {error_msg}")
+            history += f"\nAttempt {i+1} failed with error: {result['output']}"
 
-    return "Mission Failed: Maximum attempts reached."
+    return "🚨 Mission Failed: System could not heal after max attempts."
 
-
-# =========================
-# Main Entry
-# =========================
+# ============================================================
+# 4. EXECUTION BLOCK (The Control Room 🛰️)
+# ============================================================
 if __name__ == "__main__":
+    # Yahan apna LLM instance pass karo (e.g., Groq ka ChatGroq)
+    # final_llm = ChatGroq(api_key="your_key")
+    
     task_desc = (
         "Create a dataframe with 3 compounds (Alpha, Beta, Gamma). "
-        "Assign 5 different stability scores and compute t-test p-value."
+        "Give them 5 different stability scores and find the p-value using t-test."
     )
-
-    final_res = god_mode_executor(task_desc)
-
-    print("\n🏁 FINAL RESULT:")
-    print(final_res)
-````
+    
+    # Run the engine
+    # final_res = god_mode_executor(final_llm, task_desc)
+    # print(f"\n🏁 FINAL VALIDATED RESULT:\n{final_res}")
+    
+    print("🛠️ Framework Ready. Plug in your LLM to start the Autonomous Scientist.")
